@@ -1,0 +1,52 @@
+// src/app/player-detail/player-detail.component.scss
+.player-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.player-header {
+  text-align: center;
+  margin-bottom: 30px;
+  
+  .player-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    color: #666;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+}
+
+.builds-section {
+  flex: 1;
+}
+
+.stats-section {
+  flex: 2;
+}
+
+.builds-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+app-build-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  &.selected {
+    border: 2px solid #4285f4;
+  }
+}

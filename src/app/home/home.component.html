@@ -1,0 +1,4 @@
+<h2>Jogadores</h2>
+<div *ngFor="let player of players">
+  <a [routerLink]="['/player', player.id]">{{ player.name }}</a>
+</div>

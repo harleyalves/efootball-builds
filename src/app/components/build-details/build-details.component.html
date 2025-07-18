@@ -1,0 +1,25 @@
+<div class="build-details">
+  <h3>{{ build.playerName }} - {{ build.name || 'Build sem nome' }}</h3>
+  
+  <div class="build-stats">
+    <div *ngIf="build.shooting > 0"><span>Chute:</span> {{ build.shooting }}</div>
+    <div *ngIf="build.passing > 0"><span>Passe:</span> {{ build.passing }}</div>
+    <div *ngIf="build.dribbling > 0"><span>Drible:</span> {{ build.dribbling }}</div>
+    <div *ngIf="build.dexterity > 0"><span>Destreza:</span> {{ build.dexterity }}</div>
+    <div *ngIf="build.lowerBodyStrength > 0"><span>Força nas Pernas:</span> {{ build.lowerBodyStrength }}</div>
+    <div *ngIf="build.aerialStrength > 0"><span>Força Aérea:</span> {{ build.aerialStrength }}</div>
+    <div *ngIf="build.defending > 0"><span>Defesa:</span> {{ build.defending }}</div>
+    <div *ngIf="build.gk1 > 0"><span>GO1:</span> {{ build.gk1 }}</div>
+    <div *ngIf="build.gk2 > 0"><span>GO2:</span> {{ build.gk2 }}</div>
+    <div *ngIf="build.gk3 > 0"><span>GO3:</span> {{ build.gk3 }}</div>
+  </div>
+
+  <div *ngIf="build.trainingDetails" class="training-notes">
+    <h4>Detalhes do Treino:</h4>
+    <p>{{ build.trainingDetails }}</p>
+  </div>
+
+  <div *ngIf="build.imageUrl" class="build-image">
+    <img [src]="build.imageUrl" alt="Atributos finais do jogador">
+  </div>
+</div>

@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+// src/styles.scss
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #343a40;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  nav {
+    a {
+      color: #ddd;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+main {
+  padding: 2rem;
+  min-height: calc(100vh - 150px);
+}
+
+footer {
+  background: #343a40;
+  color: #ddd;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

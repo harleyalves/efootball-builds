@@ -1,0 +1,77 @@
+<h3>Enviar Nova Build</h3>
+
+<form (ngSubmit)="submitBuild()">
+  <div class="form-group">
+    <label>Jogador:</label>
+    <input type="text" [(ngModel)]="build.playerName" name="playerName" required>
+  </div>
+  
+  <div class="form-group">
+    <label>Nome da Build (opcional):</label>
+    <input type="text" [(ngModel)]="build.name" name="name">
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-input">
+      <label>Chute</label>
+      <input type="number" [(ngModel)]="build.shooting" name="shooting" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Passe</label>
+      <input type="number" [(ngModel)]="build.passing" name="passing" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Drible</label>
+      <input type="number" [(ngModel)]="build.dribbling" name="dribbling" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Destreza</label>
+      <input type="number" [(ngModel)]="build.dexterity" name="dexterity" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Força nas Pernas</label>
+      <input type="number" [(ngModel)]="build.lowerBodyStrength" name="lowerBodyStrength" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Força Aérea</label>
+      <input type="number" [(ngModel)]="build.aerialStrength" name="aerialStrength" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>Defesa</label>
+      <input type="number" [(ngModel)]="build.defending" name="defending" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>GO1</label>
+      <input type="number" [(ngModel)]="build.gk1" name="gk1" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>GO2</label>
+      <input type="number" [(ngModel)]="build.gk2" name="gk2" min="0">
+    </div>
+    
+    <div class="stat-input">
+      <label>GO3</label>
+      <input type="number" [(ngModel)]="build.gk3" name="gk3" min="0">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Detalhes do Treino:</label>
+    <textarea [(ngModel)]="build.trainingDetails" name="trainingDetails"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Imagem dos Atributos Finais (opcional):</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  </div>
+
+  <button type="submit">Enviar Build</button>
+</form>

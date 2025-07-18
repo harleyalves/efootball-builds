@@ -1,0 +1,35 @@
+<div class="player-detail" *ngIf="player">
+  <div class="player-header">
+    <h2>{{ player.name }}</h2>
+    <div class="player-info">
+      <span>Posição: {{ player.position }}</span>
+      <span>Estilo: {{ player.playStyle }}</span>
+      <span>Custo: {{ player.cost }}</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="builds-section">
+      <h3>Builds Disponíveis</h3>
+      <div class="builds-list">
+        <div *ngFor="let build of builds" 
+             class="build-card"
+             (click)="selectBuild(build)"
+             [class.selected]="currentBuild && currentBuild.id === build.id">
+          <h4>{{ build.playerName  || 'Build sem nome' }}</h4>
+          <p>Por: {{ build.playerName }}</p>
+          <div class="votes">↑ {{ build.upvotes }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="build-details-section" *ngIf="currentBuild">
+      <app-build-details [build]="currentBuild"></app-build-details>
+    </div>
+  </div>
+
+  <div class="upload-section">
+    <h3>Adicionar Nova Build</h3>
+    <app-build-upload></app-build-upload>
+  </div>
+</div>
