@@ -16,7 +16,7 @@
              class="build-card"
              (click)="selectBuild(build)"
              [class.selected]="currentBuild && currentBuild.id === build.id">
-          <h4>{{ build.playerName  || 'Build sem nome' }}</h4>
+          <h4>{{ build.name || 'Build sem nome' }}</h4>
           <p>Por: {{ build.playerName }}</p>
           <div class="votes">↑ {{ build.upvotes }}</div>
         </div>
@@ -30,6 +30,6 @@
 
   <div class="upload-section">
     <h3>Adicionar Nova Build</h3>
-    <app-build-upload></app-build-upload>
+    <app-build-upload [playerId]="playerId"></app-build-upload>
   </div>
 </div>

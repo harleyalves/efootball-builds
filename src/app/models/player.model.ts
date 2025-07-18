@@ -1,5 +1,6 @@
 export interface Build {
-  id: number;
+  id?: string; // Alterado para string opcional
+  playerId: string; // Novo campo
   playerName: string;
   name?: string;
   shooting: number;
@@ -15,13 +16,13 @@ export interface Build {
   upvotes: number;
   imageUrl?: string;
   trainingDetails?: string;
+  createdAt?: Date; // Novo campo
 }
 
 export interface Player {
-  id: number;
+  id?: string; // Alterado para string opcional
   name: string;
   position: string;
   playStyle: string;
   cost: number;
-  builds?: Build[];
 }

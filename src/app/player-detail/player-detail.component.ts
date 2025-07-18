@@ -1,13 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-
-import { Player } from '../models/player.model';
-import { Build } from '../models/player.model';
 import { PlayerService } from '../services/player.service';
+import { BuildService } from '../services/build.service';
 import { BuildDetailsComponent } from '../components/build-details/build-details.component';
 import { BuildUploadComponent } from '../components/build-upload/build-upload.component';
+import { Player } from '../models/player.model';
+import { Build } from '../models/player.model';
 
 @Component({
   selector: 'app-player-detail',
@@ -16,38 +15,38 @@ import { BuildUploadComponent } from '../components/build-upload/build-upload.co
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule,
     BuildDetailsComponent,
     BuildUploadComponent
   ]
 })
 export class PlayerDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private playerSvc = inject(PlayerService);
-
   player: Player | null = null;
   builds: Build[] = [];
   currentBuild: Build | null = null;
+  playerId!: string;
 
-ngOnInit(): void {
-  const playerId = this.route.snapshot.paramMap.get('id');
-  if (playerId) {
-    this.playerSvc.getPlayer(+playerId).subscribe(player => {
-      if (player) {
-        this.player = player;
-        this.builds = player.builds || [];
+  constructor(
+    private route: ActivatedRoute,
+    private playerService: PlayerService,
+    private buildService: BuildService
+  ) {}
+
+  ngOnInit(): void {
+    this.playerId = this.route.snapshot.paramMap.get('id') || '';
+    
+    if (this.playerId) {
+      this.playerService.getPlayer(this.playerId).subscribe(player => {
+        this.player = player as Player;
+      });
+
+      this.buildService.getBuildsByPlayer(this.playerId).subscribe(builds => {
+        this.builds = builds as Build[];
         if (this.builds.length) {
           this.currentBuild = this.builds[0];
         }
-      } else {
-        // Se o jogador não for encontrado, evite erros futuros
-        console.error('Jogador não encontrado');
-        // Aqui você pode redirecionar, mostrar uma mensagem etc.
-      }
-    });
+      });
+    }
   }
-}
-
 
   selectBuild(build: Build) {
     this.currentBuild = build;

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Build } from '../../models/player.model';
 import { CommonModule } from '@angular/common';
+import { Build } from '../../models/player.model';
 
 @Component({
   selector: 'app-build-details',

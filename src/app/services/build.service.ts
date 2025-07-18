@@ -1,38 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Build } from '../models/player.model';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BuildService {
-  private apiUrl = 'http://localhost:3000/builds';
-  private mockBuilds: Build[] = [];
+  constructor(
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
 
-  constructor(private http: HttpClient) {}
-
-  uploadBuild(build: Build, image?: File): Observable<any> {
-    // Para desenvolvimento:
-    const newBuild = {
+  uploadBuild(build: Build, image?: File) {
+    const newBuild = { 
       ...build,
-      id: Date.now(),
-      upvotes: 0,
-      imageUrl: image ? URL.createObjectURL(image) : undefined
+      createdAt: new Date(),
+      upvotes: 0
     };
-    this.mockBuilds.push(newBuild);
-    return of(newBuild);
-    
-    // Para produção:
-    // const formData = new FormData();
-    // formData.append('build', JSON.stringify(build));
-    // if (image) formData.append('image', image);
-    // return this.http.post(this.apiUrl, formData);
+
+    // Remove id existente se houver
+    delete newBuild.id;
+
+    if (image) {
+      const filePath = `builds/${Date.now()}_${image.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, image);
+      
+      return uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            newBuild.imageUrl = url;
+            this.saveBuild(newBuild);
+          });
+        })
+      ).subscribe();
+    } else {
+      return this.saveBuild(newBuild);
+    }
   }
 
-  getBuildsByPlayer(playerName: string): Observable<Build[]> {
-    // Para desenvolvimento:
-    return of(this.mockBuilds.filter(b => b.playerName === playerName));
-    
-    // Para produção:
-    // return this.http.get<Build[]>(`${this.apiUrl}?playerName=${playerName}`);
+  private saveBuild(build: Build) {
+    return this.firestore.collection('builds').add(build);
+  }
+
+  getBuildsByPlayer(playerId: string) {
+    return this.firestore.collection<Build>('builds', ref => 
+      ref.where('playerId', '==', playerId)
+         .orderBy('createdAt', 'desc')
+    ).valueChanges({ idField: 'id' });
   }
 }

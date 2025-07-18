@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BuildService } from '../../services/build.service';
 import { Build } from '../../models/player.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-build-upload',
@@ -12,8 +12,10 @@ import { Build } from '../../models/player.model';
   styleUrls: ['./build-upload.component.scss']
 })
 export class BuildUploadComponent {
+  @Input() playerId!: string; // Recebe o ID do jogador
+
   build: Build = {
-    id: 0,
+    playerId: '',
     playerName: '',
     shooting: 0,
     passing: 0,
@@ -37,9 +39,30 @@ export class BuildUploadComponent {
   }
 
   submitBuild() {
-    this.buildService.uploadBuild(this.build, this.selectedFile).subscribe({
-      next: () => alert('Build enviada com sucesso!'),
-      error: () => alert('Erro no envio')
-    });
+    // Define o playerId
+    this.build.playerId = this.playerId;
+    
+    this.buildService.uploadBuild(this.build, this.selectedFile);
+    alert('Build enviada com sucesso!');
+    this.resetForm();
+  }
+
+  private resetForm() {
+    this.build = {
+      playerId: this.playerId,
+      playerName: '',
+      shooting: 0,
+      passing: 0,
+      dribbling: 0,
+      dexterity: 0,
+      lowerBodyStrength: 0,
+      aerialStrength: 0,
+      defending: 0,
+      gk1: 0,
+      gk2: 0,
+      gk3: 0,
+      upvotes: 0
+    };
+    this.selectedFile = undefined;
   }
 }
