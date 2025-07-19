@@ -1,8 +1,9 @@
 export interface Build {
-  id?: string; // Alterado para string opcional
-  playerId: string; // Novo campo
+  id?: string;
   playerName: string;
-  name?: string;
+  position: string; // Novo campo
+  playStyle: string; // Novo campo
+  cost: number; // Novo campo
   shooting: number;
   passing: number;
   dribbling: number;
@@ -16,13 +17,5 @@ export interface Build {
   upvotes: number;
   imageUrl?: string;
   trainingDetails?: string;
-  createdAt?: Date; // Novo campo
-}
-
-export interface Player {
-  id?: string; // Alterado para string opcional
-  name: string;
-  position: string;
-  playStyle: string;
-  cost: number;
+  createdAt?: Date;
 }

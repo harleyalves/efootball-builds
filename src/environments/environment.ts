@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_PROJETO.firebaseapp.com",
-    projectId: "SEU_PROJETO",
-    storageBucket: "SEU_PROJETO.appspot.com",
-    messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-    appId: "SEU_APP_ID",
-    measurementId: "SEU_MEASUREMENT_ID" // opcional
+  apiKey: "AIzaSyDLLgdhUtvaxMlN-EiNacs-tR0IqJHjNC0",
+  authDomain: "efootball-builds.firebaseapp.com",
+  projectId: "efootball-builds",
+  storageBucket: "efootball-builds.firebasestorage.app",
+  messagingSenderId: "496036760338",
+  appId: "1:496036760338:web:31434ec53ad0d4f1a401cb",
+  measurementId: "G-5RM4YP1NXJ"
   }
 };

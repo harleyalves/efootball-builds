@@ -1,0 +1,28 @@
+{
+  "players": [
+    {
+      "name": "Schmeichel",
+      "position": "GK",
+      "playStyle": "Goleiro",
+      "cost": 1200,
+      "builds": [
+        {
+          "playerName": "Schmeichel",
+          "shooting": 0,
+          "passing": 1,
+          "dribbling": 0,
+          "dexterity": 0,
+          "lowerBodyStrength": 0,
+          "aerialStrength": 4,
+          "defending": 0,
+          "gk1": 12,
+          "gk2": 9,
+          "gk3": 8,
+          "trainingDetails": "Goleiro, Segundo Ímpeto",
+          "createdAt": "2025-07-18T12:00:00Z",
+          "upvotes": 0
+        }
+      ]
+    }
+  ]
+}

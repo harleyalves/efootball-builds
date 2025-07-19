@@ -1,20 +1,28 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+// src/app/app.config.ts
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
+import { 
+  provideFirebaseApp, 
+  initializeApp 
+} from '@angular/fire/app';
+import { 
+  provideFirestore, 
+  getFirestore 
+} from '@angular/fire/firestore';
+import { 
+  provideStorage, 
+  getStorage 
+} from '@angular/fire/storage'; // Add this import
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
-    importProvidersFrom(
-      AngularFireModule.initializeApp(environment.firebase),
-      AngularFirestoreModule,
-      AngularFireStorageModule
-    )
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()), // Add this line
   ]
 };

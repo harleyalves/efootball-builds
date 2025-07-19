@@ -1,4 +1,31 @@
-<h2>Jogadores</h2>
-<div *ngFor="let player of players">
-  <a [routerLink]="['/player', player.id]">{{ player.name }}</a>
+<div class="home-wrapper">
+  <div class="builds-list">
+    <div class="build-card" *ngFor="let build of builds">
+      <a [routerLink]="['/build', build.id]">
+        <!-- Header idêntico ao detalhe -->
+        <header class="detail-header">
+          <h3>
+            <span class="value">{{ build.playerName || 'Build sem nome' }}</span>
+          </h3>
+        </header>
+
+        <!-- Imagem idêntica ao detalhe -->
+        <div *ngIf="build.imageUrl" class="build-image">
+          <img [src]="build.imageUrl" [alt]="build.playerName" />
+        </div>
+
+        <!-- Build-stats reaproveitado, mas só 2 campos -->
+        <section class="build-stats">
+          <div>
+            <span class="stat-label">Posição:</span>
+            <span class="stat-value">{{ build.position }}</span>
+          </div>
+          <div>
+            <span class="stat-label">Estilo:</span>
+            <span class="stat-value">{{ build.playStyle }}</span>
+          </div>
+        </section>
+      </a>
+    </div>
+  </div>
 </div>

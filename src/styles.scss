@@ -1,54 +1,47 @@
-// src/styles.scss
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@use 'sass:color';
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+// 1) Variáveis de cor
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$dark-color: #2c3e50;
+$light-color: #ecf0f1;
+$gray-color: #95a5a6;
+$stats-bg: #f8f9fa;
+$accent-color: #ffc107;
+
+// 2) Mixins reutilizáveis
+@mixin card-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@mixin gradient-text {
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// 3) Reset global e transições suaves
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: all 0.2s ease;
 }
 
-header {
-  background: #343a40;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-  h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  
-  nav {
-    a {
-      color: #ddd;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      
-      &:hover {
-        color: white;
-      }
-    }
-  }
+// 4) CSS custom properties para JS ou libs que use
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --dark-color: #{$dark-color};
+  --light-color: #{$light-color};
+  --gray-color: #{$gray-color};
 }
 
-main {
-  padding: 2rem;
-  min-height: calc(100vh - 150px);
-}
-
-footer {
-  background: #343a40;
-  color: #ddd;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+// 5) Estilos base do body
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: $light-color;
+  color: $dark-color;
 }

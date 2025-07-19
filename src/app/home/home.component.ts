@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { PlayerService } from '../services/player.service';
-import { Player } from '../models/player.model';
+import { BuildService } from '../services/build.service';
+import { Build } from '../models/player.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'] 
+ 
 })
-export class HomeComponent {
-  players: Player[] = [];
+export class HomeComponent implements OnInit {
+  builds: Build[] = [];
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private buildService: BuildService) {}
 
-  ngOnInit(): void {
-    this.playerService.getPlayers().subscribe((players) => {
-      this.players = players;
-    });
-  }
+ngOnInit(): void {
+  this.buildService.getAllBuilds().subscribe(builds => {
+    this.builds = builds;
+  });
+}
 }

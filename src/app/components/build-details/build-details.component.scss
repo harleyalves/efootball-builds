@@ -1,0 +1,95 @@
+@use 'sass:color';
+@use '../../../styles.scss' as shared;
+
+.build-details {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  @include shared.card-shadow;
+  margin-bottom: 2rem;
+
+  .detail-header {
+    background: linear-gradient(to right, shared.$primary-color, shared.$secondary-color);
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white;
+
+      .label {
+        font-weight: 600;
+        opacity: 0.9;
+        margin-right: 0.5rem;
+      }
+
+      .value {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .build-image {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 3px solid shared.$accent-color;
+      @include shared.card-shadow;
+    }
+  }
+
+  .build-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    div {
+      background: shared.$stats-bg;
+      padding: 0.8rem;
+      border-radius: 6px;
+      text-align: center;
+      transition: background 0.2s;
+
+      &:hover {
+        background: color.adjust(shared.$stats-bg, $lightness: -5%);
+      }
+
+      .stat-label {
+        display: block;
+        font-weight: 600;
+        color: shared.$primary-color;
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: shared.$secondary-color;
+      }
+    }
+  }
+
+  .training-notes {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid shared.$primary-color;
+
+    h4 {
+      margin: 0 0 0.5rem;
+      color: shared.$primary-color;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+}

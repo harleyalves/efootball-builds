@@ -1,0 +1,244 @@
+@use 'sass:color';
+@use '../../../styles.scss' as shared;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  padding: 20px;
+  color: shared.$dark-color;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 15px;
+  @include shared.card-shadow;
+  overflow: hidden;
+}
+
+header {
+  background: linear-gradient(to right, shared.$primary-color, shared.$secondary-color);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+
+  h3 {
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, shared.$accent-color, color.adjust(shared.$accent-color, $lightness: -15%));
+  }
+}
+
+form {
+  padding: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: shared.$primary-color;
+    font-size: 16px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid shared.$stats-bg;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: shared.$light-color;
+    color: shared.$dark-color;
+  }
+
+  input:focus, textarea:focus {
+    border-color: shared.$primary-color;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(shared.$primary-color,0.2);
+    outline: none;
+  }
+}
+
+.stats-container {
+  margin: 30px 0;
+  padding: 20px;
+  background: shared.$stats-bg;
+  border-radius: 10px;
+  border: 1px solid color.adjust(shared.$stats-bg, $lightness: -10%);
+}
+
+.stats-container h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: shared.$primary-color;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+  gap: 15px;
+}
+
+.stat-input {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  @include shared.card-shadow;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  label {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: shared.$secondary-color;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid shared.$stats-bg;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    color: shared.$primary-color;
+  }
+
+  input:focus {
+    border-color: shared.$primary-color;
+    box-shadow: 0 0 0 2px rgba(shared.$primary-color,0.2);
+  }
+}
+
+.form-section-title {
+  font-size: 20px;
+  color: shared.$primary-color;
+  margin: 25px 0 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid shared.$accent-color;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.file-upload {
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+
+  input[type="file"] {
+    position: absolute;
+    top:0;
+    right:0;
+    min-width:100%;
+    min-height:100%;
+    font-size:100px;
+    opacity:0;
+    cursor:pointer;
+  }
+}
+
+.file-label {
+  display: block;
+  padding: 12px 15px;
+  background: shared.$stats-bg;
+  border: 2px dashed shared.$primary-color;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  color: shared.$primary-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: color.adjust(shared.$stats-bg, $lightness: -5%);
+    border-color: shared.$secondary-color;
+  }
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(to right, shared.$primary-color, shared.$secondary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  @include shared.card-shadow;
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      color.adjust(shared.$primary-color, $lightness: -15%),
+      color.adjust(shared.$secondary-color, $lightness: -15%)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.2);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+  }
+}
